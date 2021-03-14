@@ -16,9 +16,9 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Область</th>
-                <th scope="col">Район</th>
+                <th scope="col">Name</th>
+                <th scope="col">Region</th>
+                <th scope="col">Area</th>
                 <th scope="col"></th>
             </tr>
         </thead>

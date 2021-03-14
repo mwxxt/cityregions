@@ -12,7 +12,7 @@ class ProductCatController extends Controller
     public function productcatShow(){
         $product_cat=DB::table('product_cat')
                         ->select('id','product_cat_name')
-                        ->get();    
+                        ->paginate(5);    
         return view('productcat',compact('product_cat'));
     }
 }

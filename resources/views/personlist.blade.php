@@ -55,6 +55,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$person->links()}}
         <a type="button" href="{{route('personadd')}}">
             <button type="submit" class="btn btn-success">Add Human</button>
         </a>

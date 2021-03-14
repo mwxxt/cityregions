@@ -13,7 +13,7 @@ class ProductController extends Controller
         $prods=DB::table('products')
                         ->join('product_cat','products.prod_cat_id','=','product_cat.id')
                         ->select('products.id','products.productName','product_cat.product_cat_name')
-                        ->get();    
+                        ->paginate(5);    
         return view('product',compact('prods'));
     }
 }

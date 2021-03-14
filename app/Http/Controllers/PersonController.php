@@ -7,6 +7,7 @@ use App\Person;
 use App\Product;
 use App\ProductCat;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 use PDF;
 use App\Exports\PersonExport;
 use Excel;
@@ -24,7 +25,7 @@ class PersonController extends Controller
                         ->join('product_cat', 'person.id_area', '=', 'product_cat.id')
                         ->join('products', 'person.id_region', '=', 'products.id')
                         ->select('person.id_person', 'person.name_person', 'product_cat.product_cat_name','products.productName')
-                        ->get();
+                        ->paginate(5);
         // $person=Person::all();
 
        
@@ -51,12 +52,18 @@ class PersonController extends Controller
     }
 
     public function personUpdateSubmit($id_person,Request $request){
+        try{
             $person=Person::find($id_person);
             $person->name_person=$request->input('name_person');
             $person->id_area=$request['area'];
             $person->id_region=$request['region'];
             $person->save();
-            return redirect()->route('personlist');
+            //return redirect()->route('personlist');
+            return redirect()->route('alertShow')->with('success','Житель успешно обновлен')->withInput();
+        }
+        catch(QueryException $ex){
+            return redirect()->route('alertShow')->withError('Проверьте ваши поля!')->withInput();
+        }
     }
 
     public function personAdd(Request $request)
@@ -67,16 +74,27 @@ class PersonController extends Controller
 
     public function personAddNew(Request $request)
     {
+        try{
         $name= $request->input('name_person');
         $region= $request['id_region'];
         $area= $request['id_area'];
         DB::insert('EXEC insert_person ?, ?, ?',array($name,$region,$area));
-        return redirect()->route('personlist');
+        //return redirect()->route('personlist');
+        return redirect()->route('alertShow')->with('success','Житель успешно добавлен')->withInput();
+        }
+        catch(QueryException $ex){
+            return redirect()->route('alertShow')->withError('Проверьте ваши поля!')->withInput();
+        }
     }
 
     public function personDelete($id_person){
-        $person = DB::delete('EXEC delete_person ?',array($id_person));
-        return redirect()->route('personlist');
+        try{
+          $person = DB::delete('EXEC delete_person ?',array($id_person));
+          return redirect()->route('alertShow')->with('success','Житель успешно удалён!')->withInput();
+        }
+        catch(QueryException $ex){
+            return redirect()->route('alertShow')->withError($ex)->withInput();
+        }
     }
     // public function personUpdate($id_person){
     //     // var_dump($id_person);

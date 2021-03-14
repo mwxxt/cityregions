@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
+
+.hei {
+    margin-left: 10%;
+    margin-top: 4%;
+    margin-bottom: 40px;
+    font-family: 'Poppins', sans-serif;
+    width: 300px;
+}
+button {
+    margin-right: 15px;
+}
+
+body{
+    background-image: url('../blue.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -53,3 +53,5 @@ Route::get('/product','ProductController@productShow')->name('product');
 Route::get('/download-pdf','PersonController@downloadPDF')->name('personAddSubmit');
 Route::get('/download-excel','PersonController@downloadEXCEL');
 Route::get('/download-csv','PersonController@download_CSV');
+//--------------------------------- Alert -------------------------------------
+Route::get('/alert','AlertController@AlertShow')->name('alertShow');

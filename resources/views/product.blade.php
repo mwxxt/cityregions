@@ -52,6 +52,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$prods->links()}}
         <a style="margin: 20px 0 60px 0;" type="button" href="#">
             <button type="submit" class="btn btn-success">Add Area</button>
         </a>
